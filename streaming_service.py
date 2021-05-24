@@ -46,7 +46,7 @@ class Movie:
             length_s (int): length of the movie in seconds
 
         Returns:
-            dict: teh formatted length of the movie
+            dict: the formatted length of the movie
         """
         mins, secs = divmod(length_s, 60)
         hrs, mins = divmod(mins, 60)
@@ -58,7 +58,7 @@ class Movie:
 
         Args:
             name (str): the name of the Movie
-            length_s (int): teh length of the Movie in seconds
+            length_s (int): the length of the Movie in seconds
         """
 
         self.name = name
@@ -76,7 +76,15 @@ class Movie:
         self.formated_len = Movie.format_len(new_len_s)
 
 
-def add_movie(movies=dict):
+def add_movie(movies):
+    """registers a new movie
+
+    Args:
+        movies (dict): the dictionary of registered movies
+
+    Returns:
+        dict: the updated dictionary of registered movies
+    """
     LEN_MSG = 'what is the length of the movie in S must be a positive int:\n'
     movie_name = input('What is the name of the movie:\n').lower()
     if movie_name not in movies:
@@ -89,17 +97,29 @@ def add_movie(movies=dict):
     return movies
 
 
-def edit_len(movies=dict):
+def edit_len(movies):
+    """edit the length of a registered movie
+
+    Args:
+        movies (dict): the dictionary of registered movies
+    """
     NEW_LEN_MSG = 'What is the new len of the movie must be positive int\n'
     movie_name = input('What is the name of the movie\n').lower()
     if movie_name in movies:
         new_len = force_int(NEW_LEN_MSG, Movie.SHORTEST_MOVIE_LEN_S,
                             Movie.LONGEST_MOVIE_LEN_S)
         movies[movie_name].change_len(new_len)
-    return movies
 
 
-def del_movie(movies=dict):
+def del_movie(movies):
+    """deregister a movie from the registered movies
+
+    Args:
+        movies (dict): the dictionary of registered movies
+
+    Returns:
+        dict: the updated dictionary of registered movies
+    """
     movie_name = input('What is the name of the movie\n').lower()
     if movie_name in movies:
         del movies[movie_name]
@@ -110,21 +130,33 @@ def del_movie(movies=dict):
 
 
 def get_len(movies):
+    """asks the user for the name of a movie and if that movie is registered
+    it will print the length of that movie
+
+    Args:
+        movies (dict): the dictionary of registered movies
+    """
     movie_name = input('What is the name of the movie\n').lower()
     if movie_name in movies:
-        print(f'Length S: {movies[movie_name].length_s}, '
-               'Length formatted: '
+        print('Length formatted: '
               f'{":".join(movies[movie_name].formated_len)}')
 
 
 def print_all_info(movies):
+    """prints the name and length of every registered movie
+
+    Args:
+        movies (dict): the dictionary of registered movies
+    """
     print("List of all movies with corresponding info:")
     for movie in movies.values():
-        print(f'Name: {movie.name}, Length (S): {movie.length_s}, Length '
-              f'Formatted: {":".join(movie.formated_len)}')
+        print(f'Name: {movie.name}, Length '
+              f'formatted: {":".join(movie.formated_len)}')
 
 
 def menu():
+    """menu function of the program
+    """
     movie_dict = {}
     POS_CHOICES = ['a', 'd', 'e', 'l', 'p', 'q']
     while cont := input('Would you like to continue(Y|N)\n').lower() == 'y':
@@ -154,7 +186,8 @@ Please enter:
             print_all_info(movie_dict)
         else:
             print('ERROR')
+        movie_dict = dict(sorted(movie_dict.items()))
 
 
 if __name__ == '__main__':
-    menu()
+    database = menu()
