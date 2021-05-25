@@ -11,7 +11,7 @@
 # Started: 24/05/2021
 
 
-def force_int(msg=str, min=-1, max=int):
+def force_int(msg=str, min=0, max=int):
     """forces the user to input a intiger within the specified range
 
     Args:
@@ -29,9 +29,11 @@ def force_int(msg=str, min=-1, max=int):
         valid = True
         try:
             intiger = int(input(msg))
-        finally:
-            if intiger < min or intiger > max:
-                valid = False
+        except:
+            valid = False
+        if intiger < min or intiger > max:
+            print(f'valid inputs are intigers inclusive between {min} and {max}')
+            valid = False
     return intiger
 
 
@@ -109,6 +111,8 @@ def edit_len(movies):
         new_len = force_int(NEW_LEN_MSG, Movie.SHORTEST_MOVIE_LEN_S,
                             Movie.LONGEST_MOVIE_LEN_S)
         movies[movie_name].change_len(new_len)
+    else:
+        print('Movie not registered')
 
 
 def del_movie(movies):
@@ -125,7 +129,7 @@ def del_movie(movies):
         del movies[movie_name]
         print('Movie successfully deleted')
     else:
-        print('movie not registered')
+        print('Movie not registered')
     return movies
 
 
@@ -140,6 +144,8 @@ def get_len(movies):
     if movie_name in movies:
         print('Length formatted: '
               f'{":".join(movies[movie_name].formated_len)}')
+    else:
+        print('Movie not registered')
 
 
 def print_all_info(movies):
@@ -150,8 +156,11 @@ def print_all_info(movies):
     """
     print("List of all movies with corresponding info:")
     for movie in movies.values():
+        formated_len = []
+        for number in movie.formated_len:
+            formated_len.append(str(number))
         print(f'Name: {movie.name}, Length '
-              f'formatted: {":".join(movie.formated_len)}')
+              f'formatted: {":".join(formated_len)}')
 
 
 def menu():
