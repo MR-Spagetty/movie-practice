@@ -29,10 +29,10 @@ def force_int(msg=str, min=0, max=int):
         valid = True
         try:
             intiger = int(input(msg))
-        except:
+        except ValueError:
             valid = False
         if intiger < min or intiger > max:
-            print(f'valid inputs are intigers inclusive between {min} and {max}')
+            print(f'valid inputs are integers inclusive between {min} and {max}')
             valid = False
     return intiger
 
@@ -52,7 +52,7 @@ class Movie:
         """
         mins, secs = divmod(length_s, 60)
         hrs, mins = divmod(mins, 60)
-        formated_length = (hrs, mins, secs)
+        formated_length = (str(hrs), str(mins), str(secs))
         return formated_length
 
     def __init__(self, name=str, length_s=int) -> None:
