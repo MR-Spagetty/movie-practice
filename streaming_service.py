@@ -11,7 +11,7 @@
 # Started: 24/05/2021
 
 
-def force_int(msg=str, min=0, max=int):
+def force_int(msg=str, min=0, max=2**32):
     """forces the user to input a intiger within the specified range
 
     Args:
@@ -21,7 +21,7 @@ def force_int(msg=str, min=0, max=int):
         max (int): the maximum valid value
 
     Returns:
-        int: [description]
+        int: forced intiger value
     """
     valid = False
     intiger = min - 1
