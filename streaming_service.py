@@ -32,7 +32,8 @@ def force_int(msg=str, min=0, max=2**32):
         except ValueError:
             valid = False
         if intiger < min or intiger > max:
-            print(f'valid inputs are integers inclusive between {min} and {max}')
+            print('valid inputs are integers inclusive '
+                  f'between {min} and {max}')
             valid = False
     return intiger
 
