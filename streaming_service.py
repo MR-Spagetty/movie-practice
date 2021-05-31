@@ -89,8 +89,8 @@ def add_movie(movies):
         dict: the updated dictionary of registered movies
     """
     LEN_MSG = 'what is the length of the movie in S must be a positive int:\n'
-    movie_name = input('What is the name of the movie:\n').lower()
-    if movie_name not in movies:
+    movie_name = input('What is the name of the movie:\n').lower().strip()
+    if movie_name not in movies and movie_name != '':
         movie_len = force_int(LEN_MSG, Movie.SHORTEST_MOVIE_LEN_S,
                               Movie.LONGEST_MOVIE_LEN_S)
         movies[movie_name] = Movie(movie_name, movie_len)
@@ -107,7 +107,7 @@ def edit_len(movies):
         movies (dict): the dictionary of registered movies
     """
     NEW_LEN_MSG = 'What is the new len of the movie must be positive int\n'
-    movie_name = input('What is the name of the movie\n').lower()
+    movie_name = input('What is the name of the movie\n').lower().strip()
     if movie_name in movies:
         new_len = force_int(NEW_LEN_MSG, Movie.SHORTEST_MOVIE_LEN_S,
                             Movie.LONGEST_MOVIE_LEN_S)
@@ -125,7 +125,7 @@ def del_movie(movies):
     Returns:
         dict: the updated dictionary of registered movies
     """
-    movie_name = input('What is the name of the movie\n').lower()
+    movie_name = input('What is the name of the movie\n').lower().strip()
     if movie_name in movies:
         del movies[movie_name]
         print('Movie successfully deleted')
@@ -141,7 +141,7 @@ def get_len(movies):
     Args:
         movies (dict): the dictionary of registered movies
     """
-    movie_name = input('What is the name of the movie\n').lower()
+    movie_name = input('What is the name of the movie\n').lower().strip()
     if movie_name in movies:
         print('Length formatted: '
               f'{":".join(movies[movie_name].formated_len)}')
